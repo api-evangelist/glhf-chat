@@ -1,0 +1,76 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: glhf
+providerId: glhf-chat
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- AI
+- LLM
+- Inference
+- Open Source Models
+- Hugging Face
+- Plans
+description: >-
+  glhf (glhf.chat) positions itself as a usage-based platform with no required
+  subscription, billing only for the GPU resources consumed when models are run
+  and never charging for boot time. Public materials describe a beta period
+  offering free access with a discounted usage-based pricing plan to follow, and
+  competitive on-demand GPU rates relative to other GPU clouds. Specific
+  per-token or per-GPU-hour dollar amounts are not publicly documented and are
+  not reconciled in this artifact.
+notes: >-
+  Pricing details are not fully published; verify current plan, beta status, and
+  any per-token or per-GPU-hour rates on the glhf pricing page and account
+  settings during reconciliation.
+sources:
+- https://glhf.chat
+- https://glhf.chat/pricing
+- https://glhf.chat/users/settings/api
+plans:
+- id: glhf-beta-free
+  name: Beta Free Access
+  type: free
+  description: >-
+    During the beta period glhf has offered free access to run open-source
+    models through the chat interface and OpenAI-compatible API.
+  entries:
+  - label: Beta Usage
+    name: beta_usage
+    type: free
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free during beta (unverified)
+    userMultiplied: false
+  elements:
+  - name: Chat Completions
+  - name: Models
+- id: glhf-usage
+  name: Usage-Based
+  type: usage
+  description: >-
+    Usage-based model that bills for GPU resources consumed while running
+    models, with no required subscription and no charge for boot time. Specific
+    rates are not publicly documented.
+  entries:
+  - label: GPU Usage
+    name: gpu_usage
+    type: usage
+    metric: gpu_hours
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: usage-based, rates not publicly documented (unverified)
+    userMultiplied: false
+  elements:
+  - name: Chat Completions
+  - name: Models
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

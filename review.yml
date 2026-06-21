@@ -1,0 +1,74 @@
+aid: glhf-chat
+name: glhf
+review:
+  question: Does glhf (glhf.chat) expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Per updated API Evangelist scope, HTTP Server-Sent Events (SSE) is in-scope
+    for AsyncAPI modeling. An AsyncAPI 2.6 document was created at
+    asyncapi/glhf-chat-asyncapi.yml describing the chat completion SSE stream
+    (POST /chat/completions with stream=true). No WebSocket surface was modeled
+    because none is documented.
+findings:
+  summary: |
+    glhf (glhf.chat) does not publish a documented public WebSocket API. The
+    platform exposes an OpenAI-compatible REST API under the base URL
+    https://glhf.chat/api/openai/v1, secured with a Bearer API key created at
+    https://glhf.chat/users/settings/api. The documented surface is small:
+    chat completions and a models listing. Models are selected by passing a
+    Hugging Face repository as hf:org/model (for example
+    hf:meta-llama/Llama-3.3-70B-Instruct). Streaming for chat completions is
+    delivered as HTTP Server-Sent Events (SSE) via stream=true on the REST
+    endpoint; SSE is one-way HTTP streaming, not WebSocket. No realtime,
+    bidirectional, or audio streaming WebSocket (ws:// or wss://) endpoint is
+    documented.
+  statusNote: |
+    glhf's public documentation is thin and primarily surfaced in-app at
+    https://glhf.chat/users/settings/api rather than as a standalone API
+    reference. Public materials describe a beta period with free access and a
+    usage-based model to follow; pricing and rate-limit specifics are not
+    publicly documented and are marked reconciled:false in this repo. The two
+    endpoints below are confirmed from community integration reports and the
+    OpenAI-compatible convention the platform advertises; details should be
+    re-verified against the live in-app docs during reconciliation.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://glhf.chat/api/openai/v1
+      documented: true
+    - protocol: SSE
+      scheme: https
+      note: Server-Sent Events delivered over the same REST chat completions endpoint when stream=true. Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented for glhf as of the review date.
+  endpointsConfirmedRest:
+    - POST https://glhf.chat/api/openai/v1/chat/completions
+    - GET  https://glhf.chat/api/openai/v1/models
+sources:
+  - url: https://glhf.chat
+    type: Website
+    note: Marketing site describing running almost any open-source model via an OpenAI-compatible API.
+  - url: https://glhf.chat/users/settings/api
+    type: Documentation
+    note: In-app API settings page where API keys are created and base URL / usage are described.
+  - url: https://thinktank.ottomator.ai/t/is-there-any-way-to-use-glhf-chat-api/1033
+    type: Community
+    note: Confirms base URL https://glhf.chat/api/openai/v1 used as an OpenAI-like provider.
+  - url: https://thinktank.ottomator.ai/t/suggestion-question-about-glhf-chat-api-integration/1082
+    type: Community
+    note: Confirms /chat/completions and the hf:org/model model prefix requirement.
+actions:
+  asyncapiPath: asyncapi/glhf-chat-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Under the scope that allows SSE in
+    AsyncAPI, an AsyncAPI 2.6 document was authored for the chat completion SSE
+    stream, with HTTP+SSE transport documented explicitly (server protocol,
+    channel bindings, info.x-transport-notes) so SSE is never misrepresented as
+    WebSocket.

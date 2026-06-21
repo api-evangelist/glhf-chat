@@ -1,0 +1,55 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: glhf
+providerId: glhf-chat
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- AI
+- LLM
+- Inference
+- Open Source Models
+- Hugging Face
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  glhf serves an OpenAI-compatible API backed by an auto-scaling GPU scheduler.
+  Public materials note that the service initially launched without rate
+  limiting and that limits have since been applied, but specific per-account or
+  per-model request and token limits are not publicly documented. As an
+  OpenAI-compatible surface, throttling is expected to be returned as HTTP 429.
+  Specific values are not reconciled in this artifact.
+notes: >-
+  Verify any RPM, TPM, concurrency, or per-model limits in the glhf account
+  settings and documentation during reconciliation; values are not currently
+  published.
+sources:
+- https://glhf.chat
+- https://glhf.chat/users/settings/api
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Minute (RPM)
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Not publicly documented; limits applied after initial launch.
+- name: Tokens Per Minute (TPM)
+  scope: account
+  metric: tokens
+  limit: see provider documentation
+  notes: Not publicly documented.
+- name: Concurrent Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Governed by the auto-scaling GPU scheduler; not publicly documented.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,115 @@
+asyncapi: '2.6.0'
+id: 'urn:chat:glhf:openai:v1:chat-completions:sse'
+info:
+  title: glhf Chat Completions Streaming (HTTP + SSE)
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of glhf's (glhf.chat) **chat completion streaming**
+    surface.
+
+    glhf does not publish a WebSocket API. Its OpenAI-compatible REST API exposes
+    chat completions at `POST /chat/completions` under the base URL
+    `https://glhf.chat/api/openai/v1`. The only asynchronous / event-style
+    transport is **HTTP Server-Sent Events (SSE)**, delivered over that same REST
+    endpoint when the request body sets `stream: true`. SSE is a one-way,
+    server-to-client HTTP streaming channel; it is **not** WebSocket.
+
+    Following the OpenAI streaming convention that glhf is compatible with,
+    tokens are sent as data-only server-sent events as they become available,
+    with the stream terminated by a `data: [DONE]` message.
+
+    This AsyncAPI document models only the streamed events emitted by glhf's SSE
+    response. The request body itself (model as hf:org/model, messages, etc.) is
+    modeled in the companion OpenAPI document at `openapi/glhf-chat-openapi.yml`.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - glhf
+    url: https://glhf.chat
+  x-transport-notes:
+    transport: HTTP Server-Sent Events (SSE)
+    protocol: https
+    direction: server-to-client (one-way)
+    mediaType: text/event-stream
+    triggeredBy: 'POST https://glhf.chat/api/openai/v1/chat/completions with request body { "stream": true }'
+    terminator: 'data: [DONE]'
+    notWebSocket: true
+    source: https://glhf.chat/users/settings/api
+defaultContentType: text/event-stream
+servers:
+  glhf:
+    url: glhf.chat/api/openai/v1
+    protocol: https
+    description: |
+      glhf's OpenAI-compatible REST base. Chat completion streaming is delivered
+      as HTTP Server-Sent Events over this base when `stream: true` is set on the
+      JSON request body. AsyncAPI 2.6 does not define a dedicated SSE protocol
+      identifier; `https` is used here and the SSE transport is documented in
+      `info.x-transport-notes` and on each channel.
+    security:
+      - bearerAuth: []
+channels:
+  /chat/completions:
+    description: |
+      Chat completion SSE stream. The client opens this channel by issuing
+      `POST /chat/completions` with `stream: true`. The server then emits
+      `chat.completion.chunk` events as text/event-stream until a final
+      `data: [DONE]` event terminates the stream.
+    subscribe:
+      operationId: receiveChatCompletionChunk
+      summary: Receive streamed chat completion chunks as Server-Sent Events.
+      bindings:
+        http:
+          type: response
+          statusCode: 200
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                const: text/event-stream
+      message:
+        $ref: '#/components/messages/ChatCompletionChunk'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: glhf API key passed as a Bearer token, created at https://glhf.chat/users/settings/api.
+  messages:
+    ChatCompletionChunk:
+      name: ChatCompletionChunk
+      title: Chat Completion Chunk
+      contentType: text/event-stream
+      summary: A single data-only Server-Sent Event carrying a chat completion delta.
+      payload:
+        type: object
+        properties:
+          id:
+            type: string
+          object:
+            type: string
+            const: chat.completion.chunk
+          created:
+            type: integer
+          model:
+            type: string
+          choices:
+            type: array
+            items:
+              type: object
+              properties:
+                index:
+                  type: integer
+                delta:
+                  type: object
+                  properties:
+                    role:
+                      type: string
+                    content:
+                      type: string
+                finish_reason:
+                  type: string
+                  nullable: true

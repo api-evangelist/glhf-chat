@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "glhf API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a chat completion.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://glhf.chat/api/openai/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"model\": \"hf:meta-llama/Llama-3.3-70B-Instruct\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Hello!\"\n    }\n  ],\n  \"stream\": false\n}"
+            }
+          },
+          "docs": "Creates a model response for the given chat conversation. The model field must be a Hugging Face repository in the form hf:org/model. When stream is true, partial deltas are returned as Server-Sent Events."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available models.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://glhf.chat/api/openai/v1/models"
+          },
+          "docs": "Lists the models available to the account in the OpenAI models response shape."
+        }
+      ]
+    }
+  ]
+}

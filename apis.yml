@@ -1,0 +1,77 @@
+aid: glhf-chat
+url: https://raw.githubusercontent.com/api-evangelist/glhf-chat/refs/heads/main/apis.yml
+name: glhf
+kind: company
+description: glhf (glhf.chat) runs almost any open-source large language model on demand
+  through an auto-scaling GPU scheduler built on vLLM. Any Hugging Face repository can
+  be served by passing its identifier as hf:org/model to an OpenAI-compatible REST
+  API, giving access to models like Llama, Qwen, and Mixtral without self-hosting.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- LLM
+- Inference
+- Open Source Models
+- Hugging Face
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: glhf-chat:glhf-chat-completions-api
+  name: glhf Chat Completions API
+  tags:
+  - Chat
+  - Completions
+  - LLM
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://glhf.chat/users/settings/api
+  baseURL: https://glhf.chat/api/openai/v1
+  properties:
+  - url: https://glhf.chat/users/settings/api
+    type: Documentation
+  - url: https://glhf.chat/users/settings/api
+    type: APIReference
+  - url: openapi/glhf-chat-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/glhf-chat-asyncapi.yml
+    type: AsyncAPI
+  - url: collections/glhf-chat.postman_collection.json
+    type: Postman
+  description: OpenAI-compatible chat completions endpoint that serves almost any
+    open-source model from Hugging Face by passing the repository as hf:org/model.
+    Supports streaming responses via Server-Sent Events when stream is set to true.
+- aid: glhf-chat:glhf-chat-models-api
+  name: glhf Models API
+  tags:
+  - Models
+  - Catalog
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://glhf.chat/users/settings/api
+  baseURL: https://glhf.chat/api/openai/v1
+  properties:
+  - url: https://glhf.chat/users/settings/api
+    type: Documentation
+  - url: https://glhf.chat/users/settings/api
+    type: APIReference
+  - url: openapi/glhf-chat-openapi.yml
+    type: OpenAPI
+  - url: collections/glhf-chat.postman_collection.json
+    type: Postman
+  description: OpenAI-compatible models endpoint that lists the models available to
+    the account, using the same response shape as the OpenAI models API.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/glhf-chat
+- type: Website
+  url: https://glhf.chat
+- type: Documentation
+  url: https://glhf.chat/users/settings/api
+- type: Plans
+  url: plans/glhf-chat-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/glhf-chat-rate-limits.yml
+- type: FinOps
+  url: finops/glhf-chat-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
