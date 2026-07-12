@@ -60,6 +60,10 @@ apis:
   description: OpenAI-compatible models endpoint that lists the models available to
     the account, using the same response shape as the OpenAI models API.
 common:
+- type: DomainSecurity
+  url: security/glhf-chat-domain-security.yml
+- type: Authentication
+  url: authentication/glhf-chat-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/glhf-chat
 - type: Website

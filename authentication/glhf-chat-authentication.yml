@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/glhf-chat-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: glhf API key passed as a Bearer token in the Authorization header. Keys are created
+    at https://glhf.chat/users/settings/api.
+  sources:
+  - openapi/glhf-chat-openapi.yml
