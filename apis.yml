@@ -60,6 +60,8 @@ apis:
   description: OpenAI-compatible models endpoint that lists the models available to
     the account, using the same response shape as the OpenAI models API.
 common:
+- type: AgenticAccess
+  url: agentic-access/glhf-chat-agentic-access.yml
 - type: DomainSecurity
   url: security/glhf-chat-domain-security.yml
 - type: Authentication
