@@ -1,0 +1,192 @@
+openapi: 3.0.1
+info:
+  title: glhf Chat API
+  description: OpenAI-compatible REST API for glhf (glhf.chat), a platform that runs almost any open-source large language model on demand. Models are selected by passing a Hugging Face repository identifier as hf:org/model. Only the endpoints documented for the glhf OpenAI-compatible surface are described here.
+  termsOfService: https://glhf.chat
+  contact:
+    name: glhf
+    url: https://glhf.chat
+  version: '1.0'
+servers:
+- url: https://glhf.chat/api/openai/v1
+  description: glhf OpenAI-compatible base URL.
+security:
+- bearerAuth: []
+tags:
+- name: Chat
+paths:
+  /chat/completions:
+    post:
+      operationId: createChatCompletion
+      tags:
+      - Chat
+      summary: Create a chat completion.
+      description: 'Creates a model response for the given chat conversation. The model field must be a Hugging Face repository in the form hf:org/model (for example hf:meta-llama/Llama-3.3-70B-Instruct). When stream is true, partial message deltas are returned as Server-Sent Events terminated by a data: [DONE] message.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChatCompletionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChatCompletionResponse'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/ChatCompletionChunk'
+        '400':
+          description: Bad request, for example a model identifier without a valid prefix.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized, missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ChatCompletionChunk:
+      type: object
+      description: A streamed chunk of a chat completion delivered as a Server-Sent Event when stream is true.
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: chat.completion.chunk
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              delta:
+                $ref: '#/components/schemas/ChatMessage'
+              finish_reason:
+                type: string
+                nullable: true
+    CreateChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          example: chat.completion
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatCompletionChoice'
+        usage:
+          $ref: '#/components/schemas/Usage'
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+            code:
+              type: string
+    ChatMessage:
+      type: object
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+        content:
+          type: string
+    CreateChatCompletionRequest:
+      type: object
+      required:
+      - model
+      - messages
+      properties:
+        model:
+          type: string
+          description: Hugging Face repository identifier in the form hf:org/model.
+          example: hf:meta-llama/Llama-3.3-70B-Instruct
+        messages:
+          type: array
+          description: A list of messages comprising the conversation so far.
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        stream:
+          type: boolean
+          description: If true, partial message deltas are sent as Server-Sent Events.
+          default: false
+        temperature:
+          type: number
+          format: float
+          description: Sampling temperature between 0 and 2.
+        top_p:
+          type: number
+          format: float
+          description: Nucleus sampling probability mass.
+        max_tokens:
+          type: integer
+          description: Maximum number of tokens to generate in the completion.
+        stop:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          description: Up to a few sequences where generation will stop.
+        n:
+          type: integer
+          description: Number of completions to generate for each prompt.
+        presence_penalty:
+          type: number
+          format: float
+        frequency_penalty:
+          type: number
+          format: float
+    ChatCompletionChoice:
+      type: object
+      properties:
+        index:
+          type: integer
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+        finish_reason:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: glhf API key passed as a Bearer token in the Authorization header. Keys are created at https://glhf.chat/users/settings/api.

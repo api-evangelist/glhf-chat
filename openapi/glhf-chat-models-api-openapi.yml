@@ -1,0 +1,79 @@
+openapi: 3.0.1
+info:
+  title: glhf Chat Models API
+  description: OpenAI-compatible REST API for glhf (glhf.chat), a platform that runs almost any open-source large language model on demand. Models are selected by passing a Hugging Face repository identifier as hf:org/model. Only the endpoints documented for the glhf OpenAI-compatible surface are described here.
+  termsOfService: https://glhf.chat
+  contact:
+    name: glhf
+    url: https://glhf.chat
+  version: '1.0'
+servers:
+- url: https://glhf.chat/api/openai/v1
+  description: glhf OpenAI-compatible base URL.
+security:
+- bearerAuth: []
+tags:
+- name: Models
+paths:
+  /models:
+    get:
+      operationId: listModels
+      tags:
+      - Models
+      summary: List available models.
+      description: Lists the models available to the account in the OpenAI models response shape.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelsResponse'
+        '401':
+          description: Unauthorized, missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          example: hf:meta-llama/Llama-3.3-70B-Instruct
+        object:
+          type: string
+          example: model
+        created:
+          type: integer
+        owned_by:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+            code:
+              type: string
+    ListModelsResponse:
+      type: object
+      properties:
+        object:
+          type: string
+          example: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: glhf API key passed as a Bearer token in the Authorization header. Keys are created at https://glhf.chat/users/settings/api.
