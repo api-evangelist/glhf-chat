@@ -6,7 +6,20 @@ description: glhf (glhf.chat) runs almost any open-source large language model o
   through an auto-scaling GPU scheduler built on vLLM. Any Hugging Face repository can
   be served by passing its identifier as hf:org/model to an OpenAI-compatible REST
   API, giving access to models like Llama, Qwen, and Mixtral without self-hosting.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/glhf-chat.png
 tags:
 - AI
 - LLM
@@ -17,48 +30,42 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: glhf-chat:glhf-chat-completions-api
-  name: glhf Chat Completions API
+- aid: glhf-chat:glhf-chat-chat-api
+  name: glhf Chat API
+  description: The Chat API from glhf — 1 operation(s) for chat.
+  humanURL: https://glhf.chat/users/settings/api
+  baseURL: https://glhf.chat/api/openai/v1
   tags:
   - Chat
-  - Completions
-  - LLM
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://glhf.chat/users/settings/api
-  baseURL: https://glhf.chat/api/openai/v1
   properties:
-  - url: https://glhf.chat/users/settings/api
-    type: Documentation
-  - url: https://glhf.chat/users/settings/api
-    type: APIReference
-  - url: openapi/glhf-chat-openapi.yml
-    type: OpenAPI
-  - url: asyncapi/glhf-chat-asyncapi.yml
-    type: AsyncAPI
-  - url: collections/glhf-chat.postman_collection.json
-    type: Postman
-  description: OpenAI-compatible chat completions endpoint that serves almost any
-    open-source model from Hugging Face by passing the repository as hf:org/model.
-    Supports streaming responses via Server-Sent Events when stream is set to true.
+  - type: OpenAPI
+    url: openapi/glhf-chat-chat-api-openapi.yml
+  - type: Documentation
+    url: https://glhf.chat/users/settings/api
+  - type: APIReference
+    url: https://glhf.chat/users/settings/api
+  - type: AsyncAPI
+    url: asyncapi/glhf-chat-asyncapi.yml
+  - type: Postman
+    url: collections/glhf-chat.postman_collection.json
 - aid: glhf-chat:glhf-chat-models-api
   name: glhf Models API
-  tags:
-  - Models
-  - Catalog
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: The Models API from glhf — 1 operation(s) for models.
   humanURL: https://glhf.chat/users/settings/api
   baseURL: https://glhf.chat/api/openai/v1
+  tags:
+  - Models
   properties:
-  - url: https://glhf.chat/users/settings/api
-    type: Documentation
-  - url: https://glhf.chat/users/settings/api
-    type: APIReference
-  - url: openapi/glhf-chat-openapi.yml
-    type: OpenAPI
-  - url: collections/glhf-chat.postman_collection.json
-    type: Postman
-  description: OpenAI-compatible models endpoint that lists the models available to
-    the account, using the same response shape as the OpenAI models API.
+  - type: OpenAPI
+    url: openapi/glhf-chat-models-api-openapi.yml
+  - type: Documentation
+    url: https://glhf.chat/users/settings/api
+  - type: APIReference
+    url: https://glhf.chat/users/settings/api
+  - type: AsyncAPI
+    url: asyncapi/glhf-chat-asyncapi.yml
+  - type: Postman
+    url: collections/glhf-chat.postman_collection.json
 common:
 - type: AgenticAccess
   url: agentic-access/glhf-chat-agentic-access.yml
