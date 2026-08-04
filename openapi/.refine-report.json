@@ -1,0 +1,16 @@
+{
+  "provider": "glhf-chat",
+  "sources": [
+    "glhf-chat-chat-api-openapi.yml",
+    "glhf-chat-models-api-openapi.yml"
+  ],
+  "outputs": [
+    "glhf-chat-chat-api-openapi.yml",
+    "glhf-chat-models-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
