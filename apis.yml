@@ -6,6 +6,18 @@ description: glhf (glhf.chat) runs almost any open-source large language model o
   through an auto-scaling GPU scheduler built on vLLM. Any Hugging Face repository can
   be served by passing its identifier as hf:org/model to an OpenAI-compatible REST
   API, giving access to models like Llama, Qwen, and Mixtral without self-hosting.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
