@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: glhf Chat Models API
+  title: glhf Models API
   description: OpenAI-compatible REST API for glhf (glhf.chat), a platform that runs almost any open-source large language model on demand. Models are selected by passing a Hugging Face repository identifier as hf:org/model. Only the endpoints documented for the glhf OpenAI-compatible surface are described here.
   termsOfService: https://glhf.chat
   contact:
@@ -20,7 +20,7 @@ paths:
       operationId: listModels
       tags:
       - Models
-      summary: List available models.
+      summary: List available models
       description: Lists the models available to the account in the OpenAI models response shape.
       responses:
         '200':
