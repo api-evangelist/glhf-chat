@@ -37,6 +37,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+            code:
+              type: string
     Model:
       type: object
       properties:
@@ -50,18 +62,6 @@ components:
           type: integer
         owned_by:
           type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            type:
-              type: string
-            code:
-              type: string
     ListModelsResponse:
       type: object
       properties:
