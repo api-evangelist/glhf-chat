@@ -13,13 +13,13 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Chat
+- name: Chat Completions
 paths:
   /chat/completions:
     post:
       operationId: createChatCompletion
       tags:
-      - Chat
+      - Chat Completions
       summary: Create a chat completion
       description: 'Creates a model response for the given chat conversation. The model field must be a Hugging Face repository in the form hf:org/model (for example hf:meta-llama/Llama-3.3-70B-Instruct). When stream is true, partial message deltas are returned as Server-Sent Events terminated by a data: [DONE] message.'
       requestBody:
@@ -52,15 +52,28 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ChatCompletionChunk:
+    ChatMessage:
       type: object
-      description: A streamed chunk of a chat completion delivered as a Server-Sent Event when stream is true.
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+        content:
+          type: string
+    CreateChatCompletionResponse:
+      type: object
       properties:
         id:
           type: string
         object:
           type: string
-          example: chat.completion.chunk
+          example: chat.completion
         created:
           type: integer
         model:
@@ -68,16 +81,39 @@ components:
         choices:
           type: array
           items:
-            type: object
-            properties:
-              index:
-                type: integer
-              delta:
-                $ref: '#/components/schemas/ChatMessage'
-              finish_reason:
-                type:
-                - string
-                - 'null'
+            $ref: '#/components/schemas/ChatCompletionChoice'
+        usage:
+          $ref: '#/components/schemas/Usage'
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+            code:
+              type: string
+    ChatCompletionChoice:
+      type: object
+      properties:
+        index:
+          type: integer
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+        finish_reason:
+          type: string
     CreateChatCompletionRequest:
       type: object
       required:
@@ -124,44 +160,15 @@ components:
         frequency_penalty:
           type: number
           format: float
-    Usage:
+    ChatCompletionChunk:
       type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-            type:
-              type: string
-            code:
-              type: string
-    ChatCompletionChoice:
-      type: object
-      properties:
-        index:
-          type: integer
-        message:
-          $ref: '#/components/schemas/ChatMessage'
-        finish_reason:
-          type: string
-    CreateChatCompletionResponse:
-      type: object
+      description: A streamed chunk of a chat completion delivered as a Server-Sent Event when stream is true.
       properties:
         id:
           type: string
         object:
           type: string
-          example: chat.completion
+          example: chat.completion.chunk
         created:
           type: integer
         model:
@@ -169,23 +176,16 @@ components:
         choices:
           type: array
           items:
-            $ref: '#/components/schemas/ChatCompletionChoice'
-        usage:
-          $ref: '#/components/schemas/Usage'
-    ChatMessage:
-      type: object
-      required:
-      - role
-      - content
-      properties:
-        role:
-          type: string
-          enum:
-          - system
-          - user
-          - assistant
-        content:
-          type: string
+            type: object
+            properties:
+              index:
+                type: integer
+              delta:
+                $ref: '#/components/schemas/ChatMessage'
+              finish_reason:
+                type:
+                - string
+                - 'null'
   securitySchemes:
     bearerAuth:
       type: http

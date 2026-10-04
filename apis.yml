@@ -49,24 +49,6 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.23'
 apis:
-- aid: glhf-chat:glhf-chat-chat-api
-  name: glhf Chat API
-  description: The Chat API from glhf — 1 operation(s) for chat.
-  humanURL: https://glhf.chat/users/settings/api
-  baseURL: https://glhf.chat/api/openai/v1
-  tags:
-  - Chat
-  properties:
-  - type: OpenAPI
-    url: openapi/glhf-chat-chat-api-openapi.yml
-  - type: Documentation
-    url: https://glhf.chat/users/settings/api
-  - type: APIReference
-    url: https://glhf.chat/users/settings/api
-  - type: AsyncAPI
-    url: asyncapi/glhf-chat-asyncapi.yml
-  - type: Postman
-    url: collections/glhf-chat.postman_collection.json
 - aid: glhf-chat:glhf-chat-models-api
   name: glhf Models API
   description: The Models API from glhf — 1 operation(s) for models.
@@ -77,6 +59,24 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/glhf-chat-models-api-openapi.yml
+  - type: Documentation
+    url: https://glhf.chat/users/settings/api
+  - type: APIReference
+    url: https://glhf.chat/users/settings/api
+  - type: AsyncAPI
+    url: asyncapi/glhf-chat-asyncapi.yml
+  - type: Postman
+    url: collections/glhf-chat.postman_collection.json
+- aid: glhf-chat:glhf-chat-chat-completions-api
+  name: glhf Chat Completions API
+  description: The Chat Completions API from glhf — 1 operation(s) for chat completions.
+  humanURL: https://glhf.chat/users/settings/api
+  baseURL: https://glhf.chat/api/openai/v1
+  tags:
+  - Chat Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/glhf-chat-chat-completions-api-openapi.yml
   - type: Documentation
     url: https://glhf.chat/users/settings/api
   - type: APIReference
