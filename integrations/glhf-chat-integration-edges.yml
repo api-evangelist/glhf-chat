@@ -1,0 +1,23 @@
+edges:
+- partner_name: OpenAI
+  partner: openai
+  partner_match: domain
+  type: contract
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  evidence: https://github.com/api-evangelist/glhf-chat/blob/main/openapi/glhf-chat-chat-completions-api-openapi.yml#L4
+  contract_reference:
+    repo: glhf-chat
+    spec_file: glhf-chat-chat-completions-api-openapi.yml
+    property: description
+    value: OpenAI-compatible
+    note: 'glhf-chat declares OpenAI compatibility: ''description: OpenAI-compatible REST API for glhf (glhf.chat),
+      a platform that runs almost any open-source large language model on demand. Models are selected by'''
+    detected_by: sweep-model-routing.py
+    detected: '2026-10-13'
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+generated: '2026-10-13'
+method: searched
+checked: []
