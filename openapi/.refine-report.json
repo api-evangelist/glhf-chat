@@ -7,7 +7,9 @@
     "glhf-chat-chat-api-openapi.yml",
     "glhf-chat-models-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -15,10 +17,11 @@
     "glhf-chat-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
     "glhf-chat-openapi.yml: declared missing tag: Chat",
     "glhf-chat-openapi.yml: declared missing tag: Models",
-    "apis.yml register: already-registered"
+    "superseded outputs removed: glhf-chat-chat-completions-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 2 total)"
   ],
   "skipped": [
-    "glhf-chat-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "glhf-chat-chat-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "glhf-chat-models-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
