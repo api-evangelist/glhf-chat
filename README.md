@@ -1,4 +1,4 @@
-# glhf (glhf-chat)
+# glhf
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,75 +66,134 @@
 
 glhf (glhf.chat) runs almost any open-source large language model on demand through an auto-scaling GPU scheduler built on vLLM. Any Hugging Face repository can be served by passing its identifier as hf:org/model to an OpenAI-compatible REST API, giving access to models like Llama, Qwen, and Mixtral without self-hosting.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/glhf-chat/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/glhf-chat/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · LLM · Inference · Open Source Models · Hugging Face
 
-## Tags
+## glhf on APIs.io
 
-- AI
-- LLM
-- Inference
-- Open Source Models
-- Hugging Face
+Everything profiled for glhf is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/glhf-chat/](https://apis.io/providers/glhf-chat/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [glhf Models API](https://apis.io/apis/glhf-chat/glhf-chat-models-api/) — The Models API from glhf — 1 operation(s) for models.
+- [glhf Chat Completions API](https://apis.io/apis/glhf-chat/glhf-chat-chat-completions-api/) — The Chat Completions API from glhf — 1 operation(s) for chat completions.
 
-## APIs
+### Published properties
 
-### glhf Chat Completions API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-OpenAI-compatible chat completions endpoint that serves almost any open-source model from Hugging Face by passing the repository as hf:org/model. Supports streaming responses via Server-Sent Events when stream is set to true.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://glhf.chat/users/settings/api](https://glhf.chat/users/settings/api)
-- **Base URL:** `https://glhf.chat/api/openai/v1`
+Event-driven and webhook contracts.
 
-#### Tags
+- [glhf Chat Completions Streaming (HTTP + SSE)](https://apis.io/asyncapis/glhf-chat/glhf-chat-asyncapi/)
 
-- Chat
-- Completions
-- LLM
+#### Event channels (1)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://glhf.chat/users/settings/api)
-- [API Reference](https://glhf.chat/users/settings/api)
-- [OpenAPI](openapi/glhf-chat-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [AsyncAPI](asyncapi/glhf-chat-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/glhf-chat.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/glhf-chat.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [/chat/completions](https://apis.io/channels/glhf-chat/chat-completions/)
 
-### glhf Models API
+#### Agentic access (1)
 
-OpenAI-compatible models endpoint that lists the models available to the account, using the same response shape as the OpenAI models API.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://glhf.chat/users/settings/api](https://glhf.chat/users/settings/api)
-- **Base URL:** `https://glhf.chat/api/openai/v1`
+- [Glhf Chat Agentic Access](https://apis.io/agentic-access/glhf-chat/glhf-chat-agentic-access/)
 
-#### Tags
+#### Collections (3)
 
-- Models
-- Catalog
+Postman and Open Collection request collections.
 
-#### Properties
+- [glhf API](https://apis.io/collections/glhf-chat/open-glhf-chat/)
+- [glhf Chat API](https://apis.io/collections/glhf-chat/open-glhf-chat-chat-api/)
+- [glhf Chat Models API](https://apis.io/collections/glhf-chat/open-glhf-chat-models-api/)
 
-- [Documentation](https://glhf.chat/users/settings/api)
-- [API Reference](https://glhf.chat/users/settings/api)
-- [OpenAPI](openapi/glhf-chat-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/glhf-chat.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/glhf-chat.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (1)
 
-## Common Properties
+Spectral rulesets for the provider's contracts.
 
-- [LinkedIn](https://www.linkedin.com/company/glhf-chat)
+- [glhf — asyncapi rules](https://apis.io/rules/glhf-chat/glhf-chat-asyncapi-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Glhf Chat Authentication](https://apis.io/security/glhf-chat/glhf-chat-authentication/)
+- [Glhf Chat Domain Security](https://apis.io/security/glhf-chat/glhf-chat-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Glhf Chat Plans Pricing](https://apis.io/plans/glhf-chat/glhf-chat-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Glhf Chat Rate Limits](https://apis.io/rate-limits/glhf-chat/glhf-chat-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Glhf Chat Finops](https://apis.io/finops/glhf-chat/glhf-chat-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://glhf.chat)
 - [Documentation](https://glhf.chat/users/settings/api)
-- [Plans](plans/glhf-chat-plans-pricing.yml)
-- [Rate Limits](rate-limits/glhf-chat-rate-limits.yml)
-- [Fin Ops](finops/glhf-chat-finops.yml)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 59.7 |
+| Contract governance | 11.4 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 21.4 |
+| Access clarity | 5.3 |
+
+**Agent readiness 29.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/glhf-chat/](https://apis.io/providers/glhf-chat/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for glhf: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/glhf-chat/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
